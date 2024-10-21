@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Surprise Gift</title>
+  
+  <!-- Internal CSS -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0e6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden; /* Prevents scrolling */
+    }
+
+    .container {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #4e54c8;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      color: #ff007f;
+      margin: 20px 0;
+    }
+
+    #surpriseMessage {
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    h2 {
+      color: #ff007f;
+    }
+
+    /* Confetti Sprinkles */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0;
+      border-radius: 50%;
+      animation: confetti-fall 1s linear infinite;
+    }
+
+    /* Different colors for confetti */
+    .confetti:nth-child(odd) { background-color: blue; }
+    .confetti:nth-child(even) { background-color: yellow; }
+
+    /* Confetti animation */
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Special Surprise for You!</h1>
+    <p id="countdown"></p>
+    <div id="surpriseMessage" class="hidden">
+      <h2>🎉 Surprise! 🎉</h2>
+      <p>Happy monthsarry misis ko Iloveyou, Masaya akong buwan buwan, taon taon na may Asawa, Gf akong hnd sumuko saken, hnd nang iwan saken hnd nag sawa, hindi napagod, hindi nag reklamo saken na pagod na, na susuko saken, Salamat lagi misis ko sa pag mamahal sa mga sacrifices mo sa relationship natin Salamat kasi di ka sumuko, dka napagod, d humanap sa iba ng wala saken, Salamat sa contentment saken misis ko, Salamat kasi umabot tayo sa buwan na to ng masaya na mahirap pero worth it lahat, Salamat sa pag pili saken araw araw misis ko, Salamat higit kay Lord, Asawa ko Salamat sa lahat lahat simula nung simula pinakita mo ng deserve ko lahat ng to Salamat sa pag titiis saken ket ganto ako Salamat kasi naiintindhan mo sitwasyon ko, ng family ko Iloveyou Asawa ko hnd man ako perfect ayaw kung mangako na hnd na akong mang aaway pero sisikapin ko ng iwasan huh Iloveyou Asawa ko Iloveyou Salamat Salamat I pray you always.</p>
+      <p>HAPPY MONTHSARRY ULIT MISIS KO ILOVEYOU 😘😘😘</p>
+    </div>
+  </div>
+
+  <!-- Confetti elements (Hidden initially) -->
+  <div id="confetti-wrapper"></div>
+
+  <!-- Internal JavaScript -->
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    const surpriseMessage = document.getElementById('surpriseMessage');
+    const confettiWrapper = document.getElementById('confetti-wrapper');
+
+    // Set the countdown time (1 minute)
+    const surpriseDate = new Date();
+    surpriseDate.setSeconds(surpriseDate.getSeconds() + 60); // 60 seconds = 1 minute
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = surpriseDate - now;
+
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      if (timeLeft > 0) {
+        countdownElement.innerHTML = `Surprise unlocks in ${minutes} minute(s) and ${seconds} second(s)!`;
+      } else {
+        clearInterval(timer);
+        countdownElement.classList.add('hidden');
+        surpriseMessage.style.display = 'block'; // Show the surprise message
+        startConfetti(); // Trigger confetti animation
+      }
+    }
+
+    // Update the countdown every second
+    const timer = setInterval(updateCountdown, 1000);
+
+    // Function to create and animate confetti
+    function startConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+        confetti.style.animationDuration = Math.random() * 2 + 3 + 's'; // Random fall speed
+        confettiWrapper.appendChild(confetti);
+      }
+    }
+  </script>
+</body>
+</html>
